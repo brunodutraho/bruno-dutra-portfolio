@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.project-slider .slick-slide {
+  padding: 0 10px;
+}
+
+.project-slider .slick-dots li button:before {
+  color: #1B262C;
+}
+
+.project-slider .slick-prev:before,
+.project-slider .slick-next:before {
+  color: #1B262C;
+}
