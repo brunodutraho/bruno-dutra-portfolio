@@ -102,7 +102,7 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <img
-                src="/bruno-dutra-sobre.jpg"
+                src="/foto-perfil-fundo-azul.png"
                 alt="Bruno Dutra"
                 className="rounded-lg shadow-lg"
               />
