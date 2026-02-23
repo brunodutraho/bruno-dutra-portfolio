@@ -1,141 +1,117 @@
 import React, { useContext } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
-import { Database, BarChart2, Github as Git, Terminal } from 'lucide-react';
+import { Database, Wrench, TrendingUp } from 'lucide-react';
 import { LanguageContext } from '../context/LanguageContext';
 
 const About = () => {
   const { lang } = useContext(LanguageContext);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const texts = {
-    pt: {
-      title: 'Sobre Mim',
-      p1: 'Sou Analista de Dados Jr. em transição de carreira, com foco em transformar dados em insights claros e acionáveis para apoiar a tomada de decisão.',
-      p2: 'Tenho experiência prática com Power BI, SQL Server e Excel Avançado, desenvolvendo dashboards orientados a indicadores de negócio, métricas estratégicas e análises consistentes.',
-      p3: 'Atualmente, aprofundo meus estudos em Python para análise de dados e curso Análise e Desenvolvimento de Sistemas, buscando minha primeira oportunidade profissional na área de dados.',
-      categories: {
-        bi: 'Business Intelligence',
-        db: 'Banco de Dados',
-        tools: 'Ferramentas',
-        analysis: 'Análise de Dados',
-      },
-    },
-    en: {
-      title: 'About Me',
-      p1: 'I am a Junior Data Analyst in career transition, focused on turning data into clear and actionable insights to support decision-making.',
-      p2: 'I have hands-on experience with Power BI, SQL Server and Advanced Excel, building dashboards driven by business indicators and strategic metrics.',
-      p3: 'Currently, I am deepening my studies in Python for data analysis and pursuing a degree in Systems Analysis and Development, seeking my first professional opportunity in data.',
-      categories: {
-        bi: 'Business Intelligence',
-        db: 'Databases',
-        tools: 'Tools',
-        analysis: 'Data Analysis',
-      },
-    },
-  };
-
-  const t = texts[lang];
-
-  const skills = [
-    {
-      category: t.categories.bi,
-      icon: BarChart2,
-      items: [
-        'Power BI',
-        'DAX',
-        'Power Query',
-        'Modelagem Dimensional (Star Schema)',
-        'Storytelling com Dados',
-      ],
-    },
-    {
-      category: t.categories.db,
-      icon: Database,
-      items: [
-        'SQL Server',
-        'MySQL',
-        'Consultas SQL',
-        'ETL',
-        'Modelagem de Dados',
-      ],
-    },
-    {
-      category: t.categories.tools,
-      icon: Git,
-      items: [
-        'Git',
-        'GitHub',
-        'Excel Avançado',
-        'VS Code',
-      ],
-    },
-    {
-      category: t.categories.analysis,
-      icon: Terminal,
-      items: [
-        'Análise Descritiva',
-        'KPIs',
-        'Documentação Técnica',
-        'Boas Práticas em Dados',
-      ],
-    },
-  ];
 
   return (
-    <section id="sobre" className="py-20 bg-white">
+    <section id="sobre" className="py-28 bg-white">
       <div className="container mx-auto px-6">
+
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            {t.title}
+
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
+            {lang === 'pt' ? 'Sobre' : 'About'}
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+
+            {/* IMAGEM */}
             <div>
               <img
                 src="/foto-perfil-fundo-azul.png"
                 alt="Bruno Dutra"
-                className="rounded-lg shadow-lg"
+                className="rounded-xl shadow-xl"
               />
             </div>
 
+            {/* TEXTO */}
             <div>
-              <p className="text-gray-700 mb-6">{t.p1}</p>
-              <p className="text-gray-700 mb-6">{t.p2}</p>
-              <p className="text-gray-700">{t.p3}</p>
+
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                {lang === 'pt'
+                  ? 'Sou Analista de Dados Jr com foco na construção estruturada de soluções analíticas orientadas a negócio. Acredito que dados só geram valor quando organizados com clareza arquitetural, consistência lógica e direcionamento estratégico.'
+                  : 'I am a Junior Data Analyst focused on building structured, business-oriented analytical solutions. I believe data only generates value when organized with architectural clarity, logical consistency, and strategic direction.'}
+              </p>
+
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                {lang === 'pt'
+                  ? 'Tenho experiência com Power BI, DAX, modelagem dimensional (Star Schema), Python (Pandas) e desenvolvimento de aplicações analíticas com Streamlit, integrando tratamento de dados, definição de métricas, geração de KPIs e automação de relatórios com foco em confiabilidade e escalabilidade.'
+                  : 'I have experience with Power BI, DAX, dimensional modeling (Star Schema), Python (Pandas), and the development of analytical applications with Streamlit, integrating data processing, metric definition, KPI generation, and automated reporting with a focus on reliability and scalability.'}
+              </p>
+
+              <p className="text-gray-600 leading-relaxed">
+                {lang === 'pt'
+                  ? 'Atualmente direciono minha evolução para fundamentos de Engenharia de Dados, aprofundando conhecimentos em arquitetura, construção de pipelines e processamento estruturado em escala, com visão de longo prazo para ambientes orientados a dados.'
+                  : 'Currently, I am directing my growth toward Data Engineering foundations, deepening my knowledge in architecture, pipeline development, and structured processing at scale, with a long-term vision for data-driven environments.'}
+              </p>
+
             </div>
           </div>
 
-          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map(({ category, icon: Icon, items }) => (
-              <motion.div
-                key={category}
-                whileHover={{ scale: 1.04 }}
-                className="bg-gray-50 p-6 rounded-lg shadow-md"
-              >
-                <div className="flex items-center mb-4">
-                  <Icon className="w-6 h-6 text-[#1B262C] mr-2" />
-                  <h3 className="text-lg font-semibold">{category}</h3>
-                </div>
-                <ul className="space-y-2">
-                  {items.map(item => (
-                    <li key={item} className="text-gray-600">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+          {/* BLOCOS ESTRATÉGICOS */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-24">
+
+            {/* CARD 1 */}
+            <div className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#1B262C] text-white mb-6 mx-auto">
+                <Database size={22} />
+              </div>
+
+              <h3 className="text-lg font-semibold mb-4 text-center">
+                {lang === 'pt' ? 'Modelagem' : 'Data Modeling'}
+              </h3>
+
+              <p className="text-gray-600 text-sm leading-relaxed text-center">
+                {lang === 'pt'
+                  ? 'Star Schema, definição de métricas estratégicas e estruturação de KPIs orientados a negócio.'
+                  : 'Star Schema, strategic metric definition, and business-oriented KPI structuring.'}
+              </p>
+            </div>
+
+            {/* CARD 2 */}
+            <div className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#1B262C] text-white mb-6 mx-auto">
+                <Wrench size={22} />
+              </div>
+
+              <h3 className="text-lg font-semibold mb-4 text-center">
+                {lang === 'pt' ? 'Ferramentas' : 'Tools'}
+              </h3>
+
+              <p className="text-gray-600 text-sm leading-relaxed text-center">
+                Power BI, DAX, Python, Pandas, Streamlit,
+                Excel Avançado e Git.
+              </p>
+            </div>
+
+            {/* CARD 3 */}
+            <div className="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[#1B262C] text-white mb-6 mx-auto">
+                <TrendingUp size={22} />
+              </div>
+
+              <h3 className="text-lg font-semibold mb-4 text-center">
+                {lang === 'pt' ? 'Direcionamento' : 'Direction'}
+              </h3>
+
+              <p className="text-gray-600 text-sm leading-relaxed text-center">
+                {lang === 'pt'
+                  ? 'Arquitetura de Dados e evolução estruturada para Engenharia de Dados.'
+                  : 'Data Architecture and structured progression toward Data Engineering.'}
+              </p>
+            </div>
+
           </div>
+
         </motion.div>
       </div>
     </section>
