@@ -45,7 +45,7 @@ const Hero = () => {
             </a>
 
             <a
-              href="/public/bruno-dutra-cv.pdf"
+              href="/bruno-dutra-cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg transition text-center"
