@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { LanguageContext } from '../context/LanguageContext';
 
 type MenuItem = {
@@ -32,51 +32,62 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="fixed w-full bg-[#1B262C] text-white z-50 shadow-md">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
+    <>
+      <header className="fixed top-0 left-0 w-full h-[4rem] bg-[#1B262C]/95 backdrop-blur-sm text-white z-50 border-b border-white/5 sm:h-[5.5rem]">
+        <nav className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
 
-          {/* LOGO / IDENTIDADE */}
+          {/* IDENTIDADE */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-semibold tracking-wide leading-tight"
+            className="leading-tight flex flex-col"
           >
-            {/* Desktop */}
-            <span className="hidden md:block text-xl">
+            <span className="text-base md:text-lg lg:text-xl font-semibold">
               Bruno Dutra
-              <span className="block text-sm text-[#BBE1FA] font-normal">
-                {lang === 'pt' ? 'Analista de Dados Jr.' : 'Junior Data Analyst'}
-              </span>
             </span>
 
-            {/* Mobile */}
-            <span className="md:hidden flex flex-col text-[1.1rem]">
-              Bruno Dutra
-              <span className="text-xs text-[#BBE1FA]">
-                {lang === 'pt' ? 'Analista de Dados Jr.' : 'Junior Data Analyst'}
-              </span>
+            {/* Texto que deve aparecer SEMPRE */}
+            <span className="text-[11px] md:text-xs text-white/60 mt-1 whitespace-nowrap">
+              Python • SQL • Power BI • Streamlit
+            </span>
+
+            {/* Subtítulo estratégico controlado por 1100px */}
+            <span className="hidden [@media(min-width:1100px)]:block text-sm text-[#BBE1FA] font-normal mt-1 whitespace-nowrap">
+              {lang === 'pt'
+                ? 'Analista de Dados | Transformando Dados em Decisões Estratégicas'
+                : 'Data Analyst | Turning Data into Strategic Decisions'}
             </span>
           </motion.div>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex space-x-6">
+          {/* DESKTOP AREA */}
+          <div className="hidden md:flex items-center gap-6">
+
+            {/* MENU LINKS */}
+            <div className="flex gap-5">
               {menuItems.map(item => (
                 <motion.a
                   key={item.title}
                   href={item.href}
                   whileHover={{ y: -2 }}
-                  className="font-medium hover:text-[#BBE1FA] transition-colors"
+                  className="text-sm font-medium hover:text-[#BBE1FA] transition-colors whitespace-nowrap"
                 >
                   {item.title}
                 </motion.a>
               ))}
             </div>
 
-            {/* SOCIAL + LANG */}
-            <div className="flex items-center space-x-4">
+            {/* CTA somente lg+ */}
+            <motion.a
+              href="#projetos"
+              whileHover={{ scale: 1.05 }}
+              className="hidden lg:inline-flex px-4 py-2 bg-[#BBE1FA] text-[#1B262C] rounded-md text-sm font-medium whitespace-nowrap"
+            >
+              {lang === 'pt' ? 'Projetos em Produção' : 'Live Projects'}
+            </motion.a>
+
+            {/* SOCIAL */}
+            <div className="flex items-center gap-3">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
@@ -87,68 +98,56 @@ const Header: React.FC = () => {
                   className="hover:text-[#BBE1FA] transition-colors"
                   title={label}
                 >
-                  <Icon size={20} />
+                  <Icon size={18} />
                 </motion.a>
               ))}
-
-              {/* LANG SWITCH */}
-              <div className="flex items-center gap-2 ml-2">
-                <motion.button
-                  onClick={() => lang !== 'pt' && toggleLanguage()}
-                  animate={{
-                    scale: lang === 'pt' ? 1.15 : 1,
-                    opacity: lang === 'pt' ? 1 : 0.5,
-                  }}
-                  className="p-[2px] rounded bg-white shadow"
-                  title="Português"
-                >
-                  <img
-                    src="https://flagcdn.com/40x30/br.png"
-                    alt="Português"
-                    className="w-7 h-4 rounded-sm"
-                  />
-                </motion.button>
-
-                <motion.button
-                  onClick={() => lang !== 'en' && toggleLanguage()}
-                  animate={{
-                    scale: lang === 'en' ? 1.15 : 1,
-                    opacity: lang === 'en' ? 1 : 0.5,
-                  }}
-                  className="p-[2px] rounded bg-white shadow"
-                  title="English"
-                >
-                  <img
-                    src="https://flagcdn.com/40x30/us.png"
-                    alt="English"
-                    className="w-7 h-4 rounded-sm"
-                  />
-                </motion.button>
-              </div>
             </div>
-          </div>
 
-          {/* MOBILE ACTIONS */}
-          <div className="md:hidden flex items-center gap-3">
-            {/* LANG */}
-            <div className="flex gap-2">
+            {/* LANGUAGE */}
+            <div className="flex items-center gap-2">
               <button onClick={() => lang !== 'pt' && toggleLanguage()}>
                 <img
                   src="https://flagcdn.com/40x30/br.png"
-                  alt="PT"
-                  className={`w-7 h-4 rounded-sm ${lang !== 'pt' && 'opacity-50'}`}
+                  className={`w-6 h-4 rounded-sm transition-opacity ${
+                    lang === 'pt' ? 'opacity-100' : 'opacity-50'
+                  }`}
                 />
               </button>
               <button onClick={() => lang !== 'en' && toggleLanguage()}>
                 <img
                   src="https://flagcdn.com/40x30/us.png"
-                  alt="EN"
-                  className={`w-7 h-4 rounded-sm ${lang !== 'en' && 'opacity-50'}`}
+                  className={`w-6 h-4 rounded-sm transition-opacity ${
+                    lang === 'en' ? 'opacity-100' : 'opacity-50'
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
+
+          {/* MOBILE BUTTON + LANGUAGE */}
+          <div className="md:hidden flex items-center gap-3">
+
+            {/* LANGUAGE MOBILE */}
+            <div className="flex items-center gap-2">
+              <button onClick={() => lang !== 'pt' && toggleLanguage()}>
+                <img
+                  src="https://flagcdn.com/40x30/br.png"
+                  className={`w-6 h-4 rounded-sm transition-opacity ${
+                    lang === 'pt' ? 'opacity-100' : 'opacity-50'
+                  }`}
+                />
+              </button>
+
+              <button onClick={() => lang !== 'en' && toggleLanguage()}>
+                <img
+                  src="https://flagcdn.com/40x30/us.png"
+                  className={`w-6 h-4 rounded-sm transition-opacity ${
+                    lang === 'en' ? 'opacity-100' : 'opacity-50'
+                  }`}
                 />
               </button>
             </div>
 
-            {/* MENU TOGGLE */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Menu"
@@ -157,43 +156,75 @@ const Header: React.FC = () => {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-        </div>
+                            
+        </nav>
+      </header>
 
-        {/* MOBILE MENU */}
+      {/* MOBILE MENU OVERLAY (INALTERADO) */}
+      <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-6 space-y-4"
-          >
-            {menuItems.map(item => (
-              <a
-                key={item.title}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="block font-medium hover:text-[#BBE1FA]"
-              >
-                {item.title}
-              </a>
-            ))}
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
 
-            <div className="flex space-x-4 pt-4 border-t border-white/10">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#BBE1FA]"
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="fixed top-0 right-0 h-full w-80 bg-[#1B262C] text-white z-[100] shadow-2xl p-8 flex flex-col md:hidden"
+            >
+              <div className="flex justify-end mb-10">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-white hover:text-[#BBE1FA] transition-colors"
                 >
-                  <Icon size={20} />
-                </a>
-              ))}
-            </div>
-          </motion.div>
+                  <X size={26} />
+                </button>
+              </div>
+
+              <div className="flex flex-col space-y-6 text-lg">
+                {menuItems.map((item, index) => (
+                  <motion.a
+                    key={item.title}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="font-medium text-white hover:text-[#BBE1FA] transition-colors"
+                  >
+                    {item.title}
+                  </motion.a>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-10 border-t border-white/10 flex space-x-6">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2 }}
+                    className="text-white hover:text-[#BBE1FA] transition-colors"
+                    title={label}
+                  >
+                    <Icon size={22} />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </>
         )}
-      </nav>
-    </header>
+      </AnimatePresence>
+    </>
   );
 };
 
