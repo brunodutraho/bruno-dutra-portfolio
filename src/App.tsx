@@ -5,7 +5,6 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AIAssistant from './components/AIAssistant';
 import { LanguageProvider } from './context/LanguageContext';
 
 function Layout() {
@@ -17,7 +16,6 @@ function Layout() {
       <Projects />
       <Contact />
       <Footer />
-      <AIAssistant />
     </div>
   );
 }
