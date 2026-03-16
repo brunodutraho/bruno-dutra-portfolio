@@ -64,7 +64,7 @@ export default function FeaturedProject() {
             {/* Imagem do Projeto - Define a largura mestre */}
             <div className="w-full aspect-video mb-10 rounded-2xl border border-[#4A5C6A]/30 overflow-hidden bg-[#06141B] group shadow-2xl">
               <img
-                src="destaque-end-to-end.png"
+                src="https://i.postimg.cc/5tJMCqPk/destaque-end-to-end.png"
                 alt="Featured Project"
                 className="w-full h-full object-cover object-center md:object-bottom transition-transform duration-1000 group-hover:scale-105"
               />

@@ -85,7 +85,7 @@ export default function About() {
           {/* Container da Imagem - Agora com h-full para esticar */}
           <div className="relative flex-1 bg-gradient-to-br from-[#253745]/50 to-[#11212D]/50 backdrop-blur-xl rounded-3xl border border-[#4A5C6A]/30 flex items-center justify-center overflow-hidden">
             <img
-              src="foto-perfil-fundo-azul.png"
+              src="https://i.postimg.cc/tR6Q2ML5/foto-perfil-fundo-azul.png"
               alt="Profile"
               className="w-full h-full object-cover object-top"
             />

@@ -5,7 +5,7 @@ export const projects = [
     description:
       'Dashboard interativo desenvolvido em Python e Streamlit para monitoramento de KPIs de vendas, análise de receita e exploração de dados com filtros dinâmicos.',
 
-    image: 'streamlit-dashboard.png',
+    image: 'https://i.postimg.cc/pLNwwJtn/streamlit-dashboard.png',
 
     technologies: [
       'Python',
@@ -32,7 +32,7 @@ export const projects = [
     description:
       'Análise de indicadores comerciais utilizando Power BI com modelagem de dados e visualizações interativas.',
 
-    image: 'vendas-dashboard.png',
+    image: 'https://i.postimg.cc/2Spss7fD/vendas-dashboard.png',
 
     technologies: [
       'Power BI',
@@ -55,7 +55,7 @@ export const projects = [
     description:
       'Dashboard para análise de indicadores operacionais e financeiros de uma empresa de locação de veículos.',
 
-    image: 'locacao-dashboard.png',
+    image: 'https://i.postimg.cc/YqmcDyTc/locacao-dashboard.png',
 
     technologies: [
       'Power BI',

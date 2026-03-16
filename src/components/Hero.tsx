@@ -126,7 +126,7 @@ export default function Hero() {
                 <div className="absolute inset-6 bg-gradient-to-br from-[#4A5C6A]/20 to-transparent rounded-full">
                   <div className="absolute inset-8 bg-gradient-to-br from-[#4A5C6A]/20 to-transparent rounded-full flex items-center justify-center overflow-hidden">
                     <img
-                      src="foto-perfil-fundo-azul.png"
+                      src="https://i.postimg.cc/tR6Q2ML5/foto-perfil-fundo-azul.png"
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
